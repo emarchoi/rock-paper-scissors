@@ -126,10 +126,10 @@
   }
   
   .button-group button {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     color: #d094ff;
-    font-size: 60px;
+    font-size: 50px;
     border-radius: 12px;
     background-color: #593575;
     border: 4px solid #d094ff;
