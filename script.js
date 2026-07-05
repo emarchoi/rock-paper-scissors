@@ -13,6 +13,11 @@ const player2Score = document.querySelector("#player2-score");
 const currentPlayer = document.querySelector("#current-turn");
 const roundResult = document.querySelector("#result-text");
 
+const contSetup = document.querySelector(".container-setup");
+const contMain = document.querySelector(".container-main");
+
+const resetBtn = document.querySelector(".result button")
+
 const choiceBtns = document.querySelectorAll(".button-group button");
 
 let p1 = "PLAYER 1";
@@ -28,13 +33,18 @@ let player2Choice = "";
 let round = 1;
 const maxRound = 5;
 
-startBtn.addEventListener("click", (listener) => {
+startBtn.addEventListener("click", () => {
+
+    resetBtn.style.display = "none";
+    contSetup.style.display = "none";
+    contMain.style.display = "block";
+
 
     p1 = player1Input.value.toUpperCase() || "PLAYER 1";
     p2 = player2Input.value.toUpperCase() || "PLAYER 2";
 
-    player1Name.textContent = p1.toUpperCase();
-    player2Name.textContent = p2.toUpperCase();
+    player1Name.textContent = p1;
+    player2Name.textContent = p2;
 
     score1 = 0;
     score2 = 0;
@@ -66,7 +76,8 @@ choiceBtns.forEach(button => {
             player1Choice = button.id;
             turn = 2;
 
-            currentPlayer.textContent = p2.toUpperCase();
+            currentPlayer.textContent = p2;
+            roundResult.textContent = `ROUND ${round} : ${p2}'s TURN`;
         } else {
 
             player2Choice = button.id;
@@ -84,6 +95,8 @@ choiceBtns.forEach(button => {
                 }
 
                 currentPlayer.textContent = "GAME FINISHED!";
+
+                resetBtn.style.display = "inline";
 
                 choiceBtns.forEach(button => {
 
@@ -107,6 +120,14 @@ choiceBtns.forEach(button => {
 
     });
 
+});
+
+resetBtn.addEventListener("click", () => {
+    contSetup.style.display = "block";
+    contMain.style.display = "none";
+
+    player1Input.value = "";
+    player2Input.value = "";
 });
 
 function determineWinner() {
