@@ -1,5 +1,6 @@
 
 const startBtn = document.querySelector("#start-game");
+const scoreBtn = document.querySelector("#max-score");
 
 const player1Input = document.querySelector("#player1");
 const player2Input = document.querySelector("#player2");
@@ -31,7 +32,7 @@ let player1Choice = "";
 let player2Choice = "";
 
 let round = 1;
-const maxRound = 5;
+let maxScore;
 
 startBtn.addEventListener("click", () => {
 
@@ -39,6 +40,11 @@ startBtn.addEventListener("click", () => {
     contSetup.style.display = "none";
     contMain.style.display = "block";
 
+    if (scoreBtn.value === "" || scoreBtn.value > 10) {
+        maxScore = 5;
+    } else {
+        maxScore = Number(scoreBtn.value);
+    }
 
     p1 = player1Input.value.toUpperCase() || "PLAYER 1";
     p2 = player2Input.value.toUpperCase() || "PLAYER 2";
@@ -84,7 +90,7 @@ choiceBtns.forEach(button => {
 
             determineWinner();
 
-            if (round === maxRound) {
+            if (score1 >= maxScore || score2 >= maxScore) {
 
                 if (score1 > score2) {
                     roundResult.textContent = `${p1} WINS :P`;
@@ -128,6 +134,8 @@ resetBtn.addEventListener("click", () => {
 
     player1Input.value = "";
     player2Input.value = "";
+
+    scoreBtn.value = "";
 });
 
 function determineWinner() {
